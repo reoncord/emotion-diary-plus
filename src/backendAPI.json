@@ -1,0 +1,605 @@
+{
+  "openapi": "3.0.1",
+  "info": { "title": "OpenAPI definition", "version": "v0" },
+  "servers": [
+    { "url": "http://localhost:8080", "description": "Generated server url" }
+  ],
+  "paths": {
+    "/book/isBook": {
+      "put": {
+        "tags": ["Owner"],
+        "summary": "예약정보 확인(수정)",
+        "description": "사장님 사용자가 예약내용 확인 후 답변 가능",
+        "operationId": "isBookRequest",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/isBookRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/wellness/add": {
+      "post": {
+        "tags": ["admin"],
+        "summary": "운영자가 새로운 매장 추가하기",
+        "description": "새로운 매장에 대한 정보를 받아 추가",
+        "operationId": "setWellness",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/WellnessRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/scrap/add": {
+      "post": {
+        "tags": ["Member"],
+        "summary": "스크랩하기",
+        "description": "사용자가 원하는 매장 스크랩 하기",
+        "operationId": "addScrap",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ScrapRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/member/signUp": {
+      "post": {
+        "tags": ["Basic"],
+        "summary": "회원가입",
+        "description": "회원가입 후 로그인",
+        "operationId": "signUp",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SignUpRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/LoginResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/member/login": {
+      "post": {
+        "tags": ["Basic"],
+        "summary": "일반사용자로그인",
+        "description": "로그인 기능",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/LoginResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/member/SignUpOwnerRequest": {
+      "post": {
+        "tags": ["Owner"],
+        "summary": "사장님로그인",
+        "description": "사장님로그인 기능",
+        "operationId": "signUpOwner",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SignUpOwnerRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/favorite/add": {
+      "post": {
+        "tags": ["Member"],
+        "summary": "즐겨찾기",
+        "description": "사용자별 즐겨찾기 기능",
+        "operationId": "addFavorite",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/FavoriteRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/comment/add": {
+      "post": {
+        "tags": ["Member"],
+        "summary": "각 매장별 댓글 쓰기",
+        "description": "매잘 별 상세 페이지 하단에 댓글작성",
+        "operationId": "setComment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CommentRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/book": {
+      "post": {
+        "tags": ["Member"],
+        "summary": "예약하기",
+        "description": "사용자가 특정 매장을 예약 가능",
+        "operationId": "addBook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/BookRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/themePage/{themeId}": {
+      "get": {
+        "tags": ["HomePage"],
+        "summary": "테마별 매장 보기",
+        "description": "테마에 해당하는 매장 보여주기",
+        "operationId": "themePage",
+        "parameters": [
+          {
+            "name": "themeId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/WellnessResponse" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scrap/myPage": {
+      "get": {
+        "tags": ["Member"],
+        "summary": "사용자가 스크랩한 매장들 보기",
+        "description": "사용자가 스크랩한 매장 불러오기",
+        "operationId": "getScrapMyPage",
+        "parameters": [
+          {
+            "name": "request",
+            "in": "query",
+            "required": true,
+            "schema": { "$ref": "#/components/schemas/ScrapMemberRequest" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/WellnessResponse" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mainPage": {
+      "get": {
+        "tags": ["HomePage"],
+        "summary": "메인 페이지 보기",
+        "description": "메인 페이지에 모든 매장 보여주기",
+        "operationId": "getMainPage",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/WellnessResponse" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/favorite/myPage": {
+      "get": {
+        "tags": ["Member"],
+        "summary": "사용자 즐겨찾기 목록 보기",
+        "description": "사용자별 즐겨찾기 목록",
+        "operationId": "getFavoriteMyPage",
+        "parameters": [
+          {
+            "name": "request",
+            "in": "query",
+            "required": true,
+            "schema": { "$ref": "#/components/schemas/FavoriteMemberRequest" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/WellnessResponse" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/detail/get": {
+      "get": {
+        "tags": ["HomePage"],
+        "summary": "상세 페이지 불러오기",
+        "description": "상세 페이지 정보 가져오기",
+        "operationId": "getDetail",
+        "parameters": [
+          {
+            "name": "request",
+            "in": "query",
+            "required": true,
+            "schema": { "$ref": "#/components/schemas/DetailGetRequest" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/DetailResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/comment/{wellnessId}": {
+      "get": {
+        "tags": ["HomePage"],
+        "summary": "각 매장별 댓글 목록",
+        "description": "매잘 별 상세 페이지 하단에 댓글",
+        "operationId": "getComment",
+        "parameters": [
+          {
+            "name": "wellnessId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/CommentResponse" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/book/myPage": {
+      "get": {
+        "tags": ["Member", "Owner"],
+        "summary": "예약정보 확인",
+        "description": "일반사용자,사장님 사용자 모두 예약내용 확인 가능",
+        "operationId": "getMyPage",
+        "parameters": [
+          {
+            "name": "request",
+            "in": "query",
+            "required": true,
+            "schema": { "$ref": "#/components/schemas/BookRequestIsOwner" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/BookResponseCommon" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "isBookRequest": {
+        "type": "object",
+        "properties": {
+          "token": { "type": "string" },
+          "bookId": { "type": "integer", "format": "int64" },
+          "isBook": { "type": "integer", "format": "int32" }
+        }
+      },
+      "WellnessRequest": {
+        "type": "object",
+        "properties": {
+          "location": { "type": "integer", "format": "int32" },
+          "theme": { "type": "integer", "format": "int32" },
+          "title": { "type": "string" },
+          "introduce": { "type": "string" },
+          "hp": { "type": "string" },
+          "address": { "type": "string" },
+          "url": { "type": "string" },
+          "workTime": { "type": "string" },
+          "lati": { "type": "number", "format": "double" },
+          "hard": { "type": "number", "format": "double" }
+        }
+      },
+      "ScrapRequest": {
+        "type": "object",
+        "properties": {
+          "token": { "type": "string" },
+          "wellnessId": { "type": "integer", "format": "int64" }
+        }
+      },
+      "SignUpRequest": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "아이디",
+            "example": "test_id"
+          },
+          "password": {
+            "type": "string",
+            "description": "비밀번호",
+            "example": "test_pwd"
+          },
+          "nickName": {
+            "type": "string",
+            "description": "닉네임",
+            "example": "test_nickname"
+          },
+          "eleMail": {
+            "type": "string",
+            "description": "이메일",
+            "example": "test_eMail"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": { "type": "string" },
+          "isOwner": { "type": "integer", "format": "int32" }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "아이디",
+            "example": "test_id"
+          },
+          "password": {
+            "type": "string",
+            "description": "비밀번호",
+            "example": "test_pwd"
+          }
+        }
+      },
+      "SignUpOwnerRequest": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "아이디",
+            "example": "test_id"
+          },
+          "password": {
+            "type": "string",
+            "description": "비밀번호",
+            "example": "test_pwd"
+          },
+          "nickName": {
+            "type": "string",
+            "description": "닉네임",
+            "example": "test_nickname"
+          },
+          "eleMail": {
+            "type": "string",
+            "description": "이메일",
+            "example": "test_eleMail"
+          },
+          "managerId": {
+            "type": "integer",
+            "description": "이메일",
+            "format": "int64"
+          }
+        }
+      },
+      "FavoriteRequest": {
+        "type": "object",
+        "properties": {
+          "token": { "type": "string" },
+          "wellnessId": { "type": "integer", "format": "int64" }
+        }
+      },
+      "CommentRequest": {
+        "type": "object",
+        "properties": {
+          "token": { "type": "string" },
+          "wellnessId": { "type": "integer", "format": "int64" },
+          "content": { "type": "string" }
+        }
+      },
+      "BookRequest": {
+        "type": "object",
+        "properties": {
+          "token": { "type": "string" },
+          "wellnessId": { "type": "integer", "format": "int64" },
+          "content": { "type": "string" },
+          "headCnt": { "type": "integer", "format": "int32" },
+          "year": { "type": "integer", "format": "int32" },
+          "month": { "type": "integer", "format": "int32" },
+          "day": { "type": "integer", "format": "int32" },
+          "hour": { "type": "integer", "format": "int32" },
+          "minute": { "type": "integer", "format": "int32" }
+        }
+      },
+      "WellnessResponse": {
+        "type": "object",
+        "properties": {
+          "wellness_id": { "type": "integer", "format": "int64" },
+          "title": { "type": "string" },
+          "location": { "type": "integer", "format": "int32" },
+          "theme": { "type": "integer", "format": "int32" }
+        }
+      },
+      "ScrapMemberRequest": {
+        "type": "object",
+        "properties": { "token": { "type": "string" } }
+      },
+      "FavoriteMemberRequest": {
+        "type": "object",
+        "properties": { "token": { "type": "string" } }
+      },
+      "DetailGetRequest": {
+        "type": "object",
+        "properties": { "wellnessId": { "type": "integer", "format": "int64" } }
+      },
+      "DetailResponse": {
+        "type": "object",
+        "properties": {
+          "introduce": { "type": "string" },
+          "hp": { "type": "string" },
+          "address": { "type": "string" },
+          "url": { "type": "string" },
+          "workTime": { "type": "string" },
+          "title": { "type": "string" },
+          "lati": { "type": "number", "format": "double" },
+          "hard": { "type": "number", "format": "double" }
+        }
+      },
+      "CommentResponse": {
+        "type": "object",
+        "properties": {
+          "content": { "type": "string" },
+          "author": { "type": "string" },
+          "authorId": { "type": "string" }
+        }
+      },
+      "BookRequestIsOwner": {
+        "type": "object",
+        "properties": {
+          "token": { "type": "string" },
+          "isOwner": { "type": "integer", "format": "int32" }
+        }
+      },
+      "BookResponseCommon": {
+        "type": "object",
+        "properties": {
+          "bookId": { "type": "integer", "format": "int64" },
+          "title": { "type": "string" },
+          "checkIn": { "type": "string", "format": "date-time" },
+          "isBook": { "type": "integer", "format": "int32" }
+        }
+      }
+    }
+  }
+}
