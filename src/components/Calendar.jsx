@@ -1,8 +1,8 @@
 // Calendar.jsx
 import React from "react";
-import "./Calendar.css"; // Create your CSS for calendar styling
+import "./Calendar.css";
 
-const Calendar = ({ diaryEntries }) => {
+const Calendar = ({ diaryEntries, pivotDate }) => {
   // Function to determine the emotion color for each date
   const getEmotionColor = (date) => {
     const entry = diaryEntries.find(
@@ -11,7 +11,7 @@ const Calendar = ({ diaryEntries }) => {
         date.toLocaleDateString()
     );
     if (!entry) return "white"; // Default color if no entry
-    // Example: Change colors based on emotionId
+
     switch (entry.emotionId) {
       case 1:
         return "rgb(0, 190, 57)"; // 완전 좋음
@@ -24,33 +24,27 @@ const Calendar = ({ diaryEntries }) => {
       case 5:
         return "rgb(255, 82, 91)"; // 최악
       default:
-        return "white"; // Fallback
+        return "white";
     }
   };
 
   // Create a month view
   const renderCalendar = () => {
-    const currentDate = new Date();
     const startDate = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
+      pivotDate.getFullYear(),
+      pivotDate.getMonth(),
       1
     );
     const endDate = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() + 1,
+      pivotDate.getFullYear(),
+      pivotDate.getMonth() + 1,
       0
     );
     const daysInMonth = endDate.getDate();
     const calendar = [];
 
-    // Fill calendar with dates
     for (let i = 1; i <= daysInMonth; i++) {
-      const date = new Date(
-        currentDate.getFullYear(),
-        currentDate.getMonth(),
-        i
-      );
+      const date = new Date(pivotDate.getFullYear(), pivotDate.getMonth(), i);
       const color = getEmotionColor(date);
       calendar.push(
         <div

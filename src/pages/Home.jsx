@@ -1,9 +1,10 @@
+// Home.jsx
 import { useState, useContext } from "react";
 import Header from "../components/Header";
 import Button from "../components/Button";
 import DiaryList from "../components/DiaryList";
-import Calendar from "../components/Calendar"; // 캘린더 컴포넌트 추가
-import PieChartComponent from "../components/PieChartComponent"; // 원형차트 컴포넌트 추가
+import Calendar from "../components/Calendar";
+import PieChartComponent from "../components/PieChartComponent";
 import { DiaryStateContext } from "../App";
 import usePageTitle from "../hooks/usePageTitle";
 
@@ -34,17 +35,17 @@ const getMonthlyData = (pivotDate, data) => {
 
 const Home = () => {
   const data = useContext(DiaryStateContext);
-  const [pivotDate, setpivotDate] = useState(new Date());
+  const [pivotDate, setPivotDate] = useState(new Date());
   usePageTitle("감정 일기장");
 
   const monthlyData = getMonthlyData(pivotDate, data);
 
   const onIncreaseMonth = () => {
-    setpivotDate(new Date(pivotDate.getFullYear(), pivotDate.getMonth() + 1));
+    setPivotDate(new Date(pivotDate.getFullYear(), pivotDate.getMonth() + 1));
   };
 
   const onDecreaseMonth = () => {
-    setpivotDate(new Date(pivotDate.getFullYear(), pivotDate.getMonth() - 1));
+    setPivotDate(new Date(pivotDate.getFullYear(), pivotDate.getMonth() - 1));
   };
 
   return (
@@ -60,7 +61,8 @@ const Home = () => {
           <PieChartComponent diaryEntries={monthlyData} />
         </div>
       </div>
-      <Calendar diaryEntries={monthlyData} /> {/* 캘린더를 맨 아래에 위치 */}
+      <Calendar diaryEntries={monthlyData} pivotDate={pivotDate} />{" "}
+      {/* Calendar에 pivotDate 전달 */}
     </div>
   );
 };
