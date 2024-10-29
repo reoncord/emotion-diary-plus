@@ -1,0 +1,5 @@
+/* PieChartComponent.css */
+.pie-chart-container {
+  display: flex;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+}
