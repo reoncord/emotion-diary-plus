@@ -1,16 +1,18 @@
 /* Calendar.css */
 .calendar {
-  margin: 20px;
+  width: 50px;
+  margin: 30px;
 }
 
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
+  gap: 1px;
 }
 
 .calendar-day {
-  height: 50px;
+  height: 35px;
+  width: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
