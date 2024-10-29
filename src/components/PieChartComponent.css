@@ -2,4 +2,6 @@
 .pie-chart-container {
   display: flex;
   justify-content: flex-end; /* 오른쪽 정렬 */
+  margin-bottom: 40px;
+  margin-right: 30px;
 }

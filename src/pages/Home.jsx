@@ -1,4 +1,3 @@
-// Home.jsx
 import { useState, useContext } from "react";
 import Header from "../components/Header";
 import Button from "../components/Button";
@@ -55,14 +54,22 @@ const Home = () => {
         leftchild={<Button onClick={onDecreaseMonth} text={"<"} />}
         rightchild={<Button onClick={onIncreaseMonth} text={">"} />}
       />
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <DiaryList data={monthlyData} />
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "20px",
+        }}
+      >
         <div style={{ flex: "1", marginRight: "20px" }}>
-          <DiaryList data={monthlyData} />
+          <Calendar diaryEntries={monthlyData} pivotDate={pivotDate} />
+        </div>
+        <div style={{ flex: "1" }}>
           <PieChartComponent diaryEntries={monthlyData} />
         </div>
       </div>
-      <Calendar diaryEntries={monthlyData} pivotDate={pivotDate} />{" "}
-      {/* Calendar에 pivotDate 전달 */}
     </div>
   );
 };

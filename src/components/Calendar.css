@@ -1,7 +1,7 @@
 /* Calendar.css */
 .calendar {
-  width: 50px;
-  margin: 30px;
+  width: 200px; /* 원하는 너비로 조정 */
+  margin: 40px;
 }
 
 .calendar-grid {
@@ -11,8 +11,8 @@
 }
 
 .calendar-day {
-  height: 35px;
-  width: 35px;
+  height: 35px; /* 원하는 높이로 조정 */
+  width: 35px; /* 원하는 너비로 조정 */
   display: flex;
   justify-content: center;
   align-items: center;
