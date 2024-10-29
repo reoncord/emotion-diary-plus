@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Button from "../components/Button";
 import DiaryList from "../components/DiaryList";
 import Calendar from "../components/Calendar"; // 캘린더 컴포넌트 추가
-import PieChartComponent from "../components/PieChartComponent"; // 원형 차트 컴포넌트 추가
+import PieChartComponent from "../components/PieChartComponent"; // 원형차트 컴포넌트 추가
 import { DiaryStateContext } from "../App";
 import usePageTitle from "../hooks/usePageTitle";
 
@@ -21,7 +21,7 @@ const getMonthlyData = (pivotDate, data) => {
   const endTime = new Date(
     pivotDate.getFullYear(),
     pivotDate.getMonth() + 1,
-    0, // 이전 달의 마지막 날로 설정
+    0,
     23,
     59,
     59
@@ -54,10 +54,13 @@ const Home = () => {
         leftchild={<Button onClick={onDecreaseMonth} text={"<"} />}
         rightchild={<Button onClick={onIncreaseMonth} text={">"} />}
       />
-      <DiaryList data={monthlyData} />
-      <Calendar diaryEntries={monthlyData} /> {/* 캘린더 컴포넌트 추가 */}
-      <PieChartComponent diaryEntries={monthlyData} />{" "}
-      {/* 원형 차트 컴포넌트 추가 */}
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ flex: "1", marginRight: "20px" }}>
+          <DiaryList data={monthlyData} />
+          <PieChartComponent diaryEntries={monthlyData} />
+        </div>
+      </div>
+      <Calendar diaryEntries={monthlyData} /> {/* 캘린더를 맨 아래에 위치 */}
     </div>
   );
 };

@@ -14,15 +14,15 @@ const Calendar = ({ diaryEntries }) => {
     // Example: Change colors based on emotionId
     switch (entry.emotionId) {
       case 1:
-        return "lightgreen"; // 완전 좋음
+        return "rgb(0, 190, 57)"; // 완전 좋음
       case 2:
-        return "yellow"; // 좋음
+        return "rgb(176, 245, 34)"; // 좋음
       case 3:
-        return "orange"; // 그러저럭
+        return "rgb(255, 202, 46)"; // 그러저럭
       case 4:
-        return "lightcoral"; // 나쁨
+        return "rgb(255, 119, 57)"; // 나쁨
       case 5:
-        return "red"; // 최악
+        return "rgb(255, 82, 91)"; // 최악
       default:
         return "white"; // Fallback
     }
@@ -67,7 +67,6 @@ const Calendar = ({ diaryEntries }) => {
 
   return (
     <div className="calendar">
-      <h3>이번 달의 감정 캘린더</h3>
       <div className="calendar-grid">{renderCalendar()}</div>
     </div>
   );
